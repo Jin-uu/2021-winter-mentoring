@@ -1,18 +1,5 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
+#include "stack.h"
 #include <string.h>
-
-typedef struct{
-    int num;
-    char name[64];
-}element;
-
-typedef struct{
-    element *body;
-    int capacity;
-    int top;
-} stack;
 
 stack *stack_alloc(int cap)
 {
@@ -27,6 +14,7 @@ stack *stack_alloc(int cap)
 
 void stack_free(stack *this)
 {
+	free(this -> body);
     free(this);
 }
 
@@ -65,7 +53,7 @@ bool stack_push(stack *this, element elem)
     else
     {
 		this -> top++;
-        this -> body[this -> top].num = elem.num;
+        this -> body[this -> top].number = elem.number;
 		strcpy(this -> body[this -> top].name, elem.name);
     }       //성공실패 수정****
 }
