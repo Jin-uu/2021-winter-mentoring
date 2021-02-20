@@ -12,6 +12,7 @@
 typedef struct {
     int board[BOARD_HEIGHT][BOARD_WIDTH];
     int block[4][4];
+    int next_block[4][4];
     int hold_block[4][4];
     
     queue *next_block_queue;
@@ -21,16 +22,8 @@ tetris *tetris_alloc(void);
 
 void tetris_free(tetris *this);
 
-void tetris_needs_new_block(tetris *this);
+void tetris_set_needs_new_block(tetris *this);
 
-void tetris_update_board(tetris *this, int board[BOARD_HEIGHT][BOARD_WIDTH]);
-
-void tetris_get_board(tetris *this, int board[BOARD_HEIGHT][BOARD_WIDTH]);
-
-void tetris_get_block(tetris *this, int block[4][4]);
-
-void tetris_get_next_block(tetris *this, int next_block[4][4]);
-
-void tetris_get_hold_block(tetris *this, int hold_block[4][4]);
+void tetris_copy_next_block(tetris *this, int next_block[4][4]);
 
 #endif /* MODEL_H */

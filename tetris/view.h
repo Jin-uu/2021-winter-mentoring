@@ -16,4 +16,6 @@ void render_next_block(int block[4][4]);
  */
 void render_hold_block(int block[4][4]);
 
+void render_msg(const char *message);
+
 #endif /* VIEW_H */

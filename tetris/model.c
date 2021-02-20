@@ -86,30 +86,26 @@ void tetris_update_board(tetris *this, int board[BOARD_HEIGHT][BOARD_WIDTH]) {
     memcpy(this->board, board, sizeof(int) * BOARD_HEIGHT * BOARD_WIDTH);
 }
 
-void tetris_put_block(tetris *this, int block[4][4], int y, int x) {
-    for (int i = 0; i < 4; i++)
-        memcpy(&this->board[y + i][x], block[i], sizeof(int) * 4);
-}
-
-void tetris_get_board(tetris *this, int board[BOARD_HEIGHT][BOARD_WIDTH]) {
+void tetris_copy_board(tetris *this, int board[BOARD_HEIGHT][BOARD_WIDTH]) {
     memcpy(board, this->board, sizeof(int) * BOARD_HEIGHT * BOARD_WIDTH);
 }
 
-void tetris_get_block(tetris *this, int block[4][4]) {
+void tetris_copy_block(tetris *this, int block[4][4]) {
     memcpy(block, this->block, sizeof(int) * 16);
 }
 
-void tetris_get_next_block(tetris *this, int next_block[4][4]) {
+void tetris_copy_next_block(tetris *this, int next_block[4][4]) {
     int block_idx = *queue_front(this->next_block_queue);
     memcpy(next_block, blocks[block_idx], sizeof(int) * 16);
 }
 
-void tetris_needs_new_block(tetris *this) {
-    tetris_get_next_block(this, this->block);
+void tetris_set_needs_new_block(tetris *this) {
+    tetris_copy_next_block(this, this->block);
     queue_dequeue(this->next_block_queue);
+    tetris_copy_next_block(this, this->next_block);
     queue_enqueue(this->next_block_queue, rand_number_factory(BLOCK_NUM));
 }
 
-void tetris_get_hold_block(tetris *this, int hold_block[4][4]) {
+void tetris_copy_hold_block(tetris *this, int hold_block[4][4]) {
     memcpy(hold_block, this->hold_block, sizeof(int) * 16);
 }

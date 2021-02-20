@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define _XOPEN_SOURCE_EXTENDED
+#include <ncurses.h>
 
 const char view_blocks[][4] = {
     " ",
-    "□",
+    "A",
     "░",
     "▓",
 };
@@ -20,6 +22,8 @@ const int board_bx = 8;
 const int next_block_by = 4;
 const int next_block_bx = 30;
 
+const int message_by = 10;
+const int message_bx = 30;
 
 /**
  * board를 화면에 출력해준다.
@@ -29,9 +33,10 @@ void render_board(int board[20][10]) {
 
     for (int y = 0; y < 20; y++) {
         for (int x = 0; x < 10; x++) {
-            move_cursor(board_by + y, board_bx + x * 2);
+            // move_cursor(board_by + y, board_bx + x * 2);
             dot = board[y][x];
-            printf("%s", view_blocks[dot]);
+            // printf("%s", view_blocks[dot]);
+            mvprintw(board_by + y, board_bx + x * 2, "%s", view_blocks[dot]);
         }
     }
 }
@@ -41,9 +46,14 @@ void render_next_block(int block[4][4]) {
 
     for (int y = 0; y < 4; y ++) {
         for (int x = 0; x < 4; x++) {
-            move_cursor(next_block_by + y, next_block_bx + x * 2);
+            // move_cursor(next_block_by + y, next_block_bx + x * 2);
             dot = block[y][x];
-            printf("%s", view_blocks[dot]);
+            // printf("%s", view_blocks[dot]);
+            mvprintw(next_block_by + y, next_block_bx + x * 2, "%s", view_blocks[dot]);
         }
     }
+}
+
+void render_msg(const char *message) {
+    mvprintw(message_by, message_bx, "%s", message);
 }

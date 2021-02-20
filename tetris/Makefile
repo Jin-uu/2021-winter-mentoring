@@ -1,7 +1,7 @@
 CC = gcc
 TARGET = a.out
-OBJS = controller.o model.o view.o keyboard.o queue.o
-SRCS = controller.c model.c view.c keyboard.c queue.c
+OBJS = controller.o model.o view.o queue.o
+SRCS = controller.c model.c view.c queue.c
 OPT = -Wall -pedantic
 LIB = -lncurses
 
@@ -23,4 +23,4 @@ clean:
 	rm -f $(TARGET)
 
 debug:
-	$(CC) $(SRCS) -o $(TARGET) $(OPT) $(LIB)
+	$(CC) -g $(SRCS) -o $(TARGET) $(OPT) $(LIB)
